@@ -53,7 +53,7 @@ namespace OpenClosedPrinciple
             if(vehicle is PassangersVehicle)
                 Console.WriteLine("Vehicle rout to Gara de Nord");
             else if(vehicle is CargoVehicle)
-                Console.WriteLine("Vehicle rout to str. Uzinilor");            
+                Console.WriteLine("Vehicle rout to str. Uzinilor");           
         }
     }
 

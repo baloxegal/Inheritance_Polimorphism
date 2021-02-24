@@ -13,7 +13,7 @@ namespace Inheritance_Polimorphism
             Vehicle passangersVehicle = new PassangersVehicle(40);
             Vehicle cargoVehicle = new CargoVehicle(5000);
             Rout.WhatRout(passangersVehicle);
-            Rout.WhatRout(cargoVehicle);
+            Rout.WhatRout(cargoVehicle);            
             Console.WriteLine();
 
             //Compliance with the Open-Closed Principle + Compliance with the Single Responsibility Principle
