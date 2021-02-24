@@ -2,18 +2,11 @@
 
 namespace OpenClosedPrinciple
 {
-    //Violating Open-Closed Principle
-    public abstract class Vehicle
+    //Violating Open-Closed Principle + Violating Single Responsibility Principle
+    abstract class Vehicle
     {
-        public abstract void FuelConsumption();
-    }
-    class PassangersVehicle : Vehicle
-    {
-        public PassangersVehicle(int passangers)
-        {
-            this.passangers = passangers;
-        }
-        private int passangers;
+        int passangers;
+        int cargo;
         public int Passangers
         {
             get
@@ -26,103 +19,104 @@ namespace OpenClosedPrinciple
                     passangers = value;
             }
         }
-        public override void FuelConsumption()
+        public int Cargo
         {
-            //some cod;
-        }       
+            get
+            {
+                return cargo;
+            }
+            set
+            {
+                if (value >= 0)
+                    cargo = value;
+            }
+        }
+    }
+    class PassangersVehicle : Vehicle
+    {
+        public PassangersVehicle(int passangers)
+        {
+            this.Passangers = passangers;
+        }        
     }
     class CargoVehicle : Vehicle
     {
         public CargoVehicle(int cargo)
         {
-            this.cargo = cargo;
-        }
-        int cargo
-        {
-            get
-            {
-                return cargo;
-            }
-        set
-            {
-                if (value >= 0)
-                    cargo = value;
-            }
-        }
-        public override void FuelConsumption()
-        {
-            //some cod;
-        }
+            this.Cargo = cargo;
+        }           
     }
     class Rout
     { 
-        public static string WhatRout(Vehicle vehicle)
+        public static void WhatRout(Vehicle vehicle)
         {
-            if (vehicle.GetType().IsInstanceOfType(PassangersVehicle.))
-                return "Vehicle rout to str. Uzinilor";
-            else
-                return "Vehicle rout to Gara de Nord";
+            if(vehicle is PassangersVehicle)
+                Console.WriteLine("Vehicle rout to str. Uzinilor");
+            else if(vehicle is CargoVehicle)
+                Console.WriteLine("Vehicle rout to Gara de Nord");            
         }
     }
 
-        //compliance with the liscov substitution principle
-        public abstract class liscovvehicle
+    //Compliance with the Open-Closed Principle + Compliance with the Single Responsibility Principle
+    abstract class CorrectVehicle
     {
-        public abstract string dayrout();
+        public abstract void CorrectRout();
     }
-    class passangersvehicle : liscovvehicle
+    class CorrectPassangersVehicle : CorrectVehicle
     {
-        public passangersvehicle(int passangers)
+        int correctPassangers;
+        public CorrectPassangersVehicle(int correctPassangers)
         {
-            this.passangers = passangers;
+            this.correctPassangers = correctPassangers;
         }
-        int passangers;
-        public int passangers
+        public int CorrectPassangers
         {
             get
             {
-                return passangers;
+                return correctPassangers;
             }
             set
             {
                 if (value >= 0)
-                    passangers = value;
+                    correctPassangers = value;
             }
         }
-        public override string dayrout()
+        public override void CorrectRout()
         {
-            return "passangers liscov vehicle rout to gara de nord";
+            Console.WriteLine("Vehicle rout to Gara de Sud");
         }
+
     }
-    class cargovehicle : liscovvehicle
+    class CorrectCargoVehicle : CorrectVehicle
     {
-        public cargovehicle(int cargo)
+        int correctCargo;
+        public CorrectCargoVehicle(int correctCargo)
         {
-            this.cargo = cargo;
+            this.correctCargo = correctCargo;
         }
-        int cargo;
-        int cargo
+        public int CorrectCargo
         {
             get
             {
-                return cargo;
+                return correctCargo;
             }
             set
             {
                 if (value >= 0)
-                    cargo = value;
+                    correctCargo = value;
             }
         }
-        public override string dayrout()
+        public override void CorrectRout()
         {
-            return "cargo liscov vehicle rout to str. uzinilor";
+            Console.WriteLine("Vehicle rout to str. Muncesti");
         }
+
     }
-    class liscovrout
+    class CorrectClassRout
     {
-        public static string whatrout(liscovvehicle liscovvehicle)
+        public static void ThisIsCorrectRout(CorrectVehicle correctVehicle)
         {
-            return liscovvehicle.dayrout();
+            correctVehicle.CorrectRout();
         }
     }
 }
