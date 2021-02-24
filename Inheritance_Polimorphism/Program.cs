@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenClosedPrinciple;
 using Liscov_Substitution;
+using Interface_Segregation;
 
 namespace Inheritance_Polimorphism
 {
@@ -35,6 +36,19 @@ namespace Inheritance_Polimorphism
             LiscovRout.ThisIsLiscovRout(liscovPassangersVehicle);
             LiscovRout.ThisIsLiscovRout(liscovCargoVehicle);
             Console.WriteLine();
+
+            //Violating Interface Substitution Principle
+            NotInterfaceSegregatedVehicle notInterfaceSegregatedPassangersVehicle = new NotInterfaceSegregatedPassangersVehicle(10);
+            NotInterfaceSegregatedVehicle notInterfaceSegregatedCargoVehicle = new NotInterfaceSegregatedCargoVehicle(3500);
+            NotInterfaceSegregatedRout.ThisIsNotInterfaceSegregatedRout(notInterfaceSegregatedPassangersVehicle);
+            NotInterfaceSegregatedRout.ThisIsNotInterfaceSegregatedRout(notInterfaceSegregatedCargoVehicle);
+            Console.WriteLine();
+
+            //Compliance with the Interface Substitution Principle
+            InterfaceSegregatedVehicle interfaceSegregatedPassangersVehicle = new InterfaceSegregatedPassangersVehicle(12);
+            InterfaceSegregatedVehicle interfaceSegregatedCargoVehicle = new InterfaceSegregatedCargoVehicle(6000);
+            InterfaceSegregatedRout.ThisIsInterfaceSegregatedRout(interfaceSegregatedPassangersVehicle);
+            InterfaceSegregatedRout.ThisIsInterfaceSegregatedRout(interfaceSegregatedCargoVehicle);
         }
     }
 }
